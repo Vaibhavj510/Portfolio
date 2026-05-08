@@ -1,0 +1,1121 @@
+<!--
+  ============================================================
+  DEPLOYMENT — GitHub Pages
+  ============================================================
+  REQUIRED FILE STRUCTURE IN YOUR REPOSITORY:
+  ├── index.html          ← this file
+  ├── images/
+  │   ├── hero-portrait.jpg       ← your professional headshot
+  │   ├── photo-leipzig.jpg       ← Leipzig gate / autumn fog photo
+  │   ├── photo-shanghai.jpg      ← Shanghai Bund night photo
+  │   ├── photo-jeju.jpg          ← Jeju Island temple photo
+  │   └── photo-croatia.jpg       ← Plitvice Lakes waterfall photo
+  └── cv/
+      ├── Vaibhav_Jadhav_CV_EN.pdf
+      └── Vaibhav_Jadhav_CV_DE.pdf
+
+  PHOTO PREPARATION:
+  · Resize all photos to max 1400px on longest side (squoosh.app)
+  · JPG format, quality 85% — keeps files under 500KB each
+  · hero-portrait.jpg should be portrait orientation
+
+  DEPLOYMENT:
+  1. Create GitHub repo named "portfolio" (Public)
+  2. Upload all files maintaining folder structure above
+  3. Settings → Pages → Deploy from branch → main → / (root) → Save
+  4. Live at: https://[your-username].github.io/portfolio/
+  ============================================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vaibhav Jadhav — Senior MES & IIoT Engineer</title>
+<meta name="description" content="Portfolio of Vaibhav Shivaji Jadhav, Senior MES & IIoT Engineer at Deloitte. Connecting the Shop Floor to the Top Floor.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+/* ─── RESET & BASE ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { background: var(--bg-white); color: var(--text-dark); font-family: 'DM Sans', sans-serif; line-height: 1.6; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+a { text-decoration: none; color: inherit; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+/* ─── CSS VARIABLES ────────────────────────────────────────────────────────── */
+:root {
+  --bg-white:      #FAFAF8;
+  --bg-warm:       #F5F0EA;
+  --bg-dark:       #0F1923;
+  --bg-card:       #162030;
+  --bg-card-light: #FFFFFF;
+  --accent-terra:  #C4622D;
+  --accent-terra-light: #E8845A;
+  --accent-navy:   #1B3A5C;
+  --accent-teal:   #2A9D8F;
+  --accent-gold:   #E9C46A;
+  --text-dark:     #1A1A1A;
+  --text-medium:   #4A4A4A;
+  --text-muted:    #8A8A8A;
+  --text-light:    #E8F4FD;
+  --text-dim:      #7A9BB5;
+  --border-light:  #E8E2D9;
+  --border-dark:   #1E3347;
+  --shadow-sm:     0 2px 12px rgba(0,0,0,0.06);
+  --shadow-md:     0 8px 32px rgba(0,0,0,0.10);
+  --shadow-lg:     0 20px 60px rgba(0,0,0,0.14);
+  --radius:        10px;
+  --max-w:         1200px;
+}
+
+/* ─── TYPOGRAPHY ───────────────────────────────────────────────────────────── */
+h1,h2,h3,h4 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+.section-label {
+  font-family: 'Courier New', monospace;
+  font-size: 11px; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--accent-terra);
+  display: block; margin-bottom: 16px;
+}
+.playfair-italic { font-family: 'Playfair Display', serif; font-style: italic; }
+
+/* ─── LAYOUT ───────────────────────────────────────────────────────────────── */
+.container { max-width: var(--max-w); margin: 0 auto; padding: 0 40px; }
+section { padding: 110px 0; }
+@media(max-width:768px){ .container{padding:0 20px;} section{padding:70px 0;} }
+
+/* ─── NAVBAR ───────────────────────────────────────────────────────────────── */
+#navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  height: 68px; transition: all 0.35s ease;
+  padding: 0 40px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+#navbar.scrolled {
+  background: rgba(250,250,248,0.94);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+}
+#navbar.hidden { transform: translateY(-100%); }
+.nav-logo {
+  font-family: 'Playfair Display', serif; font-size: 22px;
+  color: var(--accent-terra); font-weight: 700; letter-spacing: 0.02em;
+}
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; color: var(--text-medium);
+  letter-spacing: 0.03em; transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:-3px; left:0; right:0;
+  height:1px; background:var(--accent-terra);
+  transform:scaleX(0); transition:transform 0.25s;
+}
+.nav-links a:hover { color: var(--accent-terra); }
+.nav-links a:hover::after { transform:scaleX(1); }
+.nav-right { display: flex; align-items: center; gap: 16px; }
+.lang-toggle {
+  display: flex; border: 1.5px solid var(--border-light);
+  border-radius: 20px; overflow: hidden;
+}
+.lang-btn {
+  padding: 5px 14px; font-size: 12px; font-weight: 600;
+  letter-spacing: 0.05em; color: var(--text-muted);
+  transition: all 0.2s; background: transparent;
+}
+.lang-btn.active { background: var(--accent-terra); color: #fff; }
+.nav-cv-btn {
+  padding: 7px 18px; border-radius: 20px; font-size: 12px; font-weight: 600;
+  border: 1.5px solid var(--accent-terra); color: var(--accent-terra);
+  transition: all 0.2s; letter-spacing: 0.03em;
+}
+.nav-cv-btn:hover { background: var(--accent-terra); color: #fff; }
+.hamburger { display:none; flex-direction:column; gap:5px; cursor:pointer; }
+.hamburger span { display:block; width:22px; height:2px; background:var(--text-dark); transition:all 0.3s; border-radius:2px; }
+.mobile-menu {
+  display:none; position:fixed; top:68px; left:0; right:0;
+  background:rgba(250,250,248,0.97); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border-light);
+  padding:24px 20px; z-index:999;
+}
+.mobile-menu.open { display:block; }
+.mobile-menu ul { list-style:none; }
+.mobile-menu li { padding:12px 0; border-bottom:1px solid var(--border-light); }
+.mobile-menu a { font-size:16px; font-weight:500; color:var(--text-dark); }
+.mobile-menu .mobile-bottom { margin-top:20px; display:flex; gap:12px; flex-wrap:wrap; }
+@media(max-width:900px){
+  .nav-links{display:none;}
+  .hamburger{display:flex;}
+  #navbar{padding:0 20px;}
+}
+
+/* ─── HERO ─────────────────────────────────────────────────────────────────── */
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: var(--bg-white); position: relative; overflow: hidden;
+  padding-top: 68px;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 55% 45%;
+  min-height: calc(100vh - 68px); width: 100%;
+  max-width: var(--max-w); margin: 0 auto; padding: 0 40px;
+}
+.hero-content { display:flex; flex-direction:column; justify-content:center; padding: 60px 60px 60px 0; }
+.hero-label { font-family:'Courier New',monospace; font-size:11px; letter-spacing:0.18em; text-transform:uppercase; color:var(--accent-terra); margin-bottom:24px; }
+.hero-name { font-family:'Playfair Display',serif; font-size: clamp(48px,6vw,80px); line-height:1.05; color:var(--text-dark); margin-bottom:28px; font-weight:700; }
+.hero-name span { color:var(--accent-terra); }
+.hero-tagline { font-size:18px; font-weight:500; color:var(--text-medium); margin-bottom:12px; min-height:28px; }
+.hero-sub { font-size:14px; color:var(--text-muted); margin-bottom:40px; letter-spacing:0.02em; }
+.hero-btns { display:flex; gap:14px; flex-wrap:wrap; margin-bottom:48px; }
+.btn-primary {
+  padding:13px 28px; border-radius:4px; font-size:14px; font-weight:600;
+  background:var(--accent-terra); color:#fff; transition:all 0.25s;
+  letter-spacing:0.03em;
+}
+.btn-primary:hover { background:#a8521f; transform:translateY(-2px); box-shadow:0 8px 24px rgba(196,98,45,0.3); }
+.btn-outline {
+  padding:13px 28px; border-radius:4px; font-size:14px; font-weight:600;
+  border:1.5px solid var(--accent-terra); color:var(--accent-terra);
+  transition:all 0.25s; letter-spacing:0.03em;
+}
+.btn-outline:hover { background:var(--accent-terra); color:#fff; transform:translateY(-2px); }
+.hero-stats { display:flex; gap:0; }
+.stat-item {
+  padding-right:32px; margin-right:32px;
+  border-right:1px solid var(--border-light);
+}
+.stat-item:last-child { border:none; padding:0; margin:0; }
+.stat-num { font-family:'Playfair Display',serif; font-size:32px; font-weight:700; color:var(--accent-terra); line-height:1; }
+.stat-label { font-size:12px; color:var(--text-muted); margin-top:4px; letter-spacing:0.03em; }
+.hero-photo-col {
+  position:relative; display:flex; align-items:flex-end;
+  overflow:hidden;
+}
+.hero-photo-wrap {
+  width:100%; height:100%; min-height:500px;
+  position:relative; animation:heroSettle 1.4s ease forwards;
+}
+@keyframes heroSettle { from{transform:scale(1.03)} to{transform:scale(1)} }
+.hero-photo-wrap img {
+  width:100%; height:100%; object-fit:cover; object-position:center top;
+}
+.hero-photo-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to right, var(--bg-white) 0%, transparent 20%, transparent 80%, var(--bg-white) 100%);
+}
+.hero-photo-overlay-bottom {
+  position:absolute; bottom:0; left:0; right:0; height:120px;
+  background:linear-gradient(to top, var(--bg-white), transparent);
+}
+.scroll-indicator {
+  position:absolute; bottom:32px; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:6px;
+  animation:bounceDown 2s ease-in-out infinite;
+}
+.scroll-indicator span { font-size:11px; letter-spacing:0.1em; color:var(--text-muted); text-transform:uppercase; }
+.scroll-indicator svg { color:var(--accent-terra); }
+@keyframes bounceDown { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+/* Hero background texture */
+#hero::before {
+  content:''; position:absolute; inset:0; z-index:0;
+  background-image: radial-gradient(circle at 20% 50%, rgba(196,98,45,0.04) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, rgba(27,58,92,0.04) 0%, transparent 50%);
+}
+.hero-inner { position:relative; z-index:1; }
+@media(max-width:900px){
+  .hero-inner { grid-template-columns:1fr; padding:0 20px; }
+  .hero-photo-col { min-height:320px; margin:-20px -20px 0; order:-1; }
+  .hero-content { padding:40px 0 40px; }
+  .hero-photo-overlay { background:linear-gradient(to bottom, transparent 60%, var(--bg-white) 100%); }
+  .hero-name { font-size:42px; }
+}
+
+/* ─── ABOUT ────────────────────────────────────────────────────────────────── */
+#about { background:var(--bg-white); }
+.about-grid { display:grid; grid-template-columns:3fr 2fr; gap:64px; align-items:start; }
+.about-text h2 { font-size:clamp(32px,4vw,48px); color:var(--text-dark); margin-bottom:24px; }
+.about-text p { font-size:16px; color:var(--text-medium); line-height:1.8; }
+.about-card {
+  background:var(--bg-card-light); border-radius:var(--radius);
+  border:1px solid var(--border-light); padding:32px;
+  box-shadow:var(--shadow-md); position:sticky; top:100px;
+}
+.about-card-item { display:flex; align-items:flex-start; gap:12px; margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid var(--border-light); }
+.about-card-item:last-child { border:none; margin:0; padding:0; }
+.about-icon { width:36px; height:36px; border-radius:8px; background:rgba(196,98,45,0.1); display:flex; align-items:center; justify-content:center; flex-shrink:0; color:var(--accent-terra); }
+.about-card-label { font-size:11px; text-transform:uppercase; letter-spacing:0.1em; color:var(--text-muted); margin-bottom:4px; }
+.about-card-value { font-size:14px; font-weight:500; color:var(--text-dark); line-height:1.5; }
+.daad-badge {
+  display:inline-flex; align-items:center; gap:6px;
+  background:rgba(233,196,106,0.15); border:1px solid rgba(233,196,106,0.4);
+  border-radius:20px; padding:4px 12px; font-size:12px; font-weight:600; color:#9A7B0A;
+}
+.status-dot { width:8px; height:8px; border-radius:50%; background:#2ECC71; display:inline-block; animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.7;transform:scale(1.2)} }
+@media(max-width:768px){ .about-grid{grid-template-columns:1fr;gap:40px;} .about-card{position:static;} }
+
+/* ─── WORK / EXPERIENCE ────────────────────────────────────────────────────── */
+#work { background:var(--bg-dark); }
+#work .section-label { color: var(--accent-terra); }
+#work h2 { color: var(--text-light); }
+.timeline { position:relative; padding-left:32px; margin-top:56px; }
+.timeline::before {
+  content:''; position:absolute; left:0; top:8px; bottom:8px; width:1px;
+  background:linear-gradient(to bottom, var(--accent-terra), rgba(196,98,45,0.1));
+}
+.timeline-entry { position:relative; margin-bottom:60px; }
+.timeline-entry::before {
+  content:''; position:absolute; left:-36px; top:8px; width:9px; height:9px;
+  border-radius:50%; background:var(--accent-terra);
+  box-shadow:0 0 0 3px rgba(196,98,45,0.2);
+}
+.entry-meta { display:flex; align-items:baseline; gap:16px; margin-bottom:8px; flex-wrap:wrap; }
+.entry-date { font-family:'Courier New',monospace; font-size:12px; color:var(--accent-terra); letter-spacing:0.08em; }
+.entry-company { font-size:18px; font-weight:600; color:var(--text-light); font-family:'Playfair Display',serif; }
+.entry-role { font-size:14px; color:var(--text-dim); margin-bottom:20px; }
+.entry-location { font-size:12px; color:var(--text-dim); display:flex; align-items:center; gap:4px; }
+.project-cards { display:grid; gap:16px; }
+.project-card {
+  background:var(--bg-card); border-radius:var(--radius); padding:24px;
+  border:1px solid var(--border-dark);
+  border-left:3px solid transparent;
+  transition:all 0.3s ease;
+  position:relative; overflow:hidden;
+}
+.project-card::before {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(135deg, rgba(196,98,45,0.04) 0%, transparent 60%);
+  opacity:0; transition:opacity 0.3s;
+}
+.project-card:hover { border-left-color:var(--accent-terra); transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,0.3); }
+.project-card:hover::before { opacity:1; }
+.project-card-header { display:flex; align-items:center; gap:12px; margin-bottom:16px; }
+.project-icon { width:36px; height:36px; border-radius:8px; background:rgba(196,98,45,0.12); display:flex; align-items:center; justify-content:center; color:var(--accent-terra); flex-shrink:0; }
+.project-title { font-size:15px; font-weight:600; color:var(--text-light); line-height:1.3; }
+.project-bullets { list-style:none; margin-bottom:16px; }
+.project-bullets li {
+  font-size:13.5px; color:var(--text-dim); line-height:1.7; padding-left:16px;
+  position:relative; margin-bottom:6px;
+}
+.project-bullets li::before { content:'—'; position:absolute; left:0; color:var(--accent-terra); font-size:11px; top:4px; }
+.tech-tags { display:flex; flex-wrap:wrap; gap:7px; }
+.tech-tag {
+  font-size:11px; padding:3px 10px; border-radius:20px; font-weight:500;
+  background:rgba(196,98,45,0.08); color:rgba(196,98,45,0.9);
+  border:1px solid rgba(196,98,45,0.2); letter-spacing:0.03em;
+}
+.compact-entry {
+  background:var(--bg-card); border-radius:var(--radius); padding:24px;
+  border:1px solid var(--border-dark); margin-top:0;
+}
+.compact-entry p { font-size:14px; color:var(--text-dim); line-height:1.7; margin-bottom:12px; }
+
+/* ─── SKILLS ───────────────────────────────────────────────────────────────── */
+#skills { background:var(--bg-white); }
+.skills-intro { max-width:600px; margin-bottom:56px; }
+.skills-intro h2 { font-size:clamp(32px,4vw,48px); margin-bottom:16px; }
+.skills-intro p { font-size:16px; color:var(--text-medium); }
+.skills-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:20px; }
+.skill-card {
+  background:var(--bg-card-light); border-radius:var(--radius);
+  border:1px solid var(--border-light); padding:28px;
+  transition:all 0.3s; box-shadow:var(--shadow-sm);
+  border-top:3px solid transparent;
+}
+.skill-card:hover { border-top-color:var(--accent-terra); transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.skill-card-header { display:flex; align-items:center; gap:12px; margin-bottom:20px; }
+.skill-card-icon { width:40px; height:40px; border-radius:10px; background:rgba(196,98,45,0.08); display:flex; align-items:center; justify-content:center; color:var(--accent-terra); }
+.skill-card-title { font-size:15px; font-weight:600; color:var(--text-dark); }
+.skill-tags { display:flex; flex-wrap:wrap; gap:8px; }
+.skill-tag {
+  font-size:12px; padding:5px 12px; border-radius:20px;
+  background:var(--bg-warm); color:var(--accent-navy);
+  border:1px solid var(--border-light); font-weight:500;
+  transition:all 0.2s;
+}
+.skill-tag:hover { background:rgba(196,98,45,0.08); border-color:var(--accent-terra); color:var(--accent-terra); }
+@media(max-width:768px){ .skills-grid{grid-template-columns:1fr;} }
+
+/* ─── EDUCATION ────────────────────────────────────────────────────────────── */
+#education { background:var(--bg-warm); }
+#education h2 { font-size:clamp(32px,4vw,48px); margin-bottom:48px; }
+.edu-grid { display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:40px; }
+.edu-card {
+  background:var(--bg-card-light); border-radius:var(--radius); padding:32px;
+  border:1px solid var(--border-light); box-shadow:var(--shadow-sm);
+  transition:all 0.3s;
+}
+.edu-card:hover { box-shadow:var(--shadow-md); transform:translateY(-3px); }
+.edu-card-icon { width:44px; height:44px; border-radius:12px; background:rgba(196,98,45,0.08); display:flex; align-items:center; justify-content:center; color:var(--accent-terra); margin-bottom:20px; }
+.edu-degree { font-size:17px; font-weight:700; color:var(--text-dark); margin-bottom:6px; font-family:'Playfair Display',serif; }
+.edu-institution { font-size:14px; color:var(--accent-navy); font-weight:500; margin-bottom:4px; }
+.edu-date { font-size:12px; color:var(--text-muted); font-family:'Courier New',monospace; margin-bottom:16px; }
+.edu-thesis { font-size:13px; color:var(--text-medium); line-height:1.6; font-style:italic; border-left:2px solid var(--border-light); padding-left:12px; margin-bottom:16px; }
+.certs-row { display:flex; flex-wrap:wrap; gap:12px; margin-bottom:32px; }
+.cert-badge {
+  display:flex; align-items:center; gap:8px;
+  background:var(--bg-card-light); border-radius:var(--radius); padding:12px 18px;
+  border:1px solid var(--border-light); box-shadow:var(--shadow-sm);
+  transition:all 0.2s;
+}
+.cert-badge:hover { border-color:var(--accent-terra); transform:translateY(-2px); }
+.cert-badge-icon { color:var(--accent-terra); flex-shrink:0; }
+.cert-badge-text { font-size:13px; font-weight:500; color:var(--text-dark); }
+.daad-block {
+  background:var(--bg-card-light); border-radius:var(--radius); padding:28px 32px;
+  border-left:4px solid var(--accent-gold); box-shadow:var(--shadow-sm);
+}
+.daad-block p { font-family:'Playfair Display',serif; font-style:italic; font-size:16px; color:var(--text-medium); line-height:1.7; }
+.daad-block strong { color:var(--text-dark); font-style:normal; }
+@media(max-width:768px){ .edu-grid{grid-template-columns:1fr;} }
+
+/* ─── DIVIDER ──────────────────────────────────────────────────────────────── */
+#qualanc-divider {
+  background:linear-gradient(to bottom, var(--bg-warm), var(--bg-white));
+  padding:70px 0; text-align:center; position:relative;
+}
+.divider-inner { display:flex; align-items:center; justify-content:center; gap:24px; }
+.divider-line { height:1px; width:120px; background:var(--border-light); transform-origin:center; }
+.divider-text {
+  font-family:'Courier New',monospace; font-size:13px; letter-spacing:0.3em;
+  color:var(--text-muted); text-transform:lowercase; white-space:nowrap;
+}
+.divider-char { display:inline-block; opacity:0; transition:opacity 0.3s; }
+.divider-char.visible { opacity:1; }
+
+/* ─── BEYOND / STORY ───────────────────────────────────────────────────────── */
+#story { background:var(--bg-white); }
+.story-opener {
+  text-align:center; max-width:760px; margin:0 auto 72px;
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:clamp(20px,3vw,28px); color:var(--accent-terra); line-height:1.5;
+}
+.story-letter {
+  max-width:720px; margin:0 auto 80px;
+  font-family:'Playfair Display',serif; font-size:17px; line-height:1.85; color:var(--text-medium);
+}
+.story-letter p { margin-bottom:28px; }
+.story-letter p:last-child { margin:0; }
+.story-cols { display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-bottom:72px; }
+.story-col {
+  background:var(--bg-warm); border-radius:var(--radius); padding:32px 28px;
+  text-align:center; border:1px solid var(--border-light); transition:all 0.3s;
+}
+.story-col:hover { transform:translateY(-4px); box-shadow:var(--shadow-md); }
+.story-col-icon { width:52px; height:52px; border-radius:14px; background:rgba(196,98,45,0.1); display:flex; align-items:center; justify-content:center; color:var(--accent-terra); margin:0 auto 20px; }
+.story-col h3 { font-size:17px; margin-bottom:10px; color:var(--text-dark); }
+.story-col p { font-size:14px; color:var(--text-medium); line-height:1.7; }
+.gallery-heading { font-size:clamp(28px,3vw,38px); margin-bottom:8px; color:var(--text-dark); }
+.gallery-sub { font-family:'Courier New',monospace; font-size:11px; letter-spacing:0.15em; color:var(--text-muted); text-transform:uppercase; margin-bottom:36px; display:block; }
+.photo-grid {
+  display:grid; grid-template-columns:repeat(2,1fr); gap:16px;
+  grid-template-rows:auto;
+}
+.photo-item {
+  overflow:hidden; border-radius:var(--radius); position:relative;
+  background:var(--bg-warm);
+}
+.photo-item:nth-child(1) { grid-row:span 2; }
+.photo-item img { width:100%; height:100%; object-fit:cover; transition:transform 0.5s ease; min-height:240px; }
+.photo-item:hover img { transform:scale(1.03); }
+.photo-caption {
+  position:absolute; bottom:0; left:0; right:0; padding:16px;
+  background:linear-gradient(to top, rgba(15,25,35,0.7), transparent);
+  color:#fff; font-family:'Courier New',monospace; font-size:11px;
+  letter-spacing:0.1em; opacity:0; transition:opacity 0.3s;
+}
+.photo-item:hover .photo-caption { opacity:1; }
+.gallery-credit { font-family:'Courier New',monospace; font-size:11px; color:var(--text-muted); text-align:center; margin-top:20px; letter-spacing:0.12em; }
+@media(max-width:768px){ .story-cols{grid-template-columns:1fr;} .photo-grid{grid-template-columns:1fr;} .photo-item:nth-child(1){grid-row:auto;} }
+
+/* ─── CONTACT ──────────────────────────────────────────────────────────────── */
+#contact { background:var(--bg-dark); text-align:center; }
+.contact-heading { font-family:'Playfair Display',serif; font-size:clamp(36px,5vw,64px); color:var(--text-light); margin-bottom:16px; }
+.contact-sub { font-size:16px; color:var(--text-dim); margin-bottom:48px; max-width:520px; margin-left:auto; margin-right:auto; }
+.contact-btns { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+.contact-btn-outline {
+  display:flex; align-items:center; gap:8px;
+  padding:13px 24px; border-radius:4px; font-size:14px; font-weight:600;
+  border:1.5px solid rgba(232,244,253,0.25); color:var(--text-light);
+  transition:all 0.25s; letter-spacing:0.03em;
+}
+.contact-btn-outline:hover { border-color:var(--text-light); transform:translateY(-2px); }
+.contact-btn-solid {
+  display:flex; align-items:center; gap:8px;
+  padding:13px 28px; border-radius:4px; font-size:14px; font-weight:600;
+  background:var(--accent-terra); color:#fff; transition:all 0.25s; letter-spacing:0.03em;
+}
+.contact-btn-solid:hover { background:#a8521f; transform:translateY(-2px); box-shadow:0 8px 24px rgba(196,98,45,0.4); }
+
+/* ─── FOOTER ───────────────────────────────────────────────────────────────── */
+footer {
+  background:var(--bg-dark); border-top:1px solid var(--border-dark);
+  padding:24px 40px; display:flex; justify-content:space-between; align-items:center;
+}
+footer p { font-size:12px; color:var(--text-dim); letter-spacing:0.03em; }
+@media(max-width:600px){ footer{flex-direction:column;gap:8px;text-align:center;padding:20px;} }
+
+/* ─── UTILITIES ────────────────────────────────────────────────────────────── */
+.text-terra { color:var(--accent-terra); }
+section { scroll-margin-top:80px; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     NAVBAR
+═══════════════════════════════════════════════════════════════════════════ -->
+<nav id="navbar">
+  <a class="nav-logo" href="#hero">VJ</a>
+  <ul class="nav-links">
+    <li><a href="#about" data-en="About" data-de="Über mich">About</a></li>
+    <li><a href="#work" data-en="Work" data-de="Arbeit">Work</a></li>
+    <li><a href="#skills" data-en="Skills" data-de="Fähigkeiten">Skills</a></li>
+    <li><a href="#education" data-en="Education" data-de="Ausbildung">Education</a></li>
+    <li><a href="#story" data-en="Story" data-de="Geschichte">Story</a></li>
+    <li><a href="#contact" data-en="Contact" data-de="Kontakt">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="de">DE</button>
+    </div>
+    <a href="cv/Vaibhav_Jadhav_CV_EN.pdf" class="nav-cv-btn cv-download" download data-en="Download CV" data-de="Lebenslauf">Download CV</a>
+  </div>
+  <div class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <ul>
+    <li><a href="#about" data-en="About" data-de="Über mich">About</a></li>
+    <li><a href="#work" data-en="Work" data-de="Arbeit">Work</a></li>
+    <li><a href="#skills" data-en="Skills" data-de="Fähigkeiten">Skills</a></li>
+    <li><a href="#education" data-en="Education" data-de="Ausbildung">Education</a></li>
+    <li><a href="#story" data-en="Story" data-de="Geschichte">Story</a></li>
+    <li><a href="#contact" data-en="Contact" data-de="Kontakt">Contact</a></li>
+  </ul>
+  <div class="mobile-bottom">
+    <div class="lang-toggle">
+      <button class="lang-btn active" data-lang="en">EN</button>
+      <button class="lang-btn" data-lang="de">DE</button>
+    </div>
+    <a href="cv/Vaibhav_Jadhav_CV_EN.pdf" class="btn-outline cv-download" download data-en="Download CV" data-de="Lebenslauf">Download CV</a>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <span class="hero-label" data-en="Senior MES & IIoT Engineer · Leipzig, Germany" data-de="Senior MES & IIoT Ingenieur · Leipzig, Deutschland">Senior MES & IIoT Engineer · Leipzig, Germany</span>
+      <h1 class="hero-name">Vaibhav Jadhav</h1>
+      <p class="hero-tagline" id="heroTagline"></p>
+      <p class="hero-sub" data-en="Senior Engineer at Deloitte · 5+ years · 17 plants · 3 continents" data-de="Senior Engineer bei Deloitte · 5+ Jahre · 17 Werke · 3 Kontinente">Senior Engineer at Deloitte · 5+ years · 17 plants · 3 continents</p>
+      <div class="hero-btns">
+        <a href="#work" class="btn-primary" data-en="View My Work" data-de="Meine Arbeit">View My Work</a>
+        <a href="cv/Vaibhav_Jadhav_CV_EN.pdf" class="btn-outline cv-download" download data-en="Download CV ↓" data-de="Lebenslauf laden ↓">Download CV ↓</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" id="stat1">5+</div>
+          <div class="stat-label" data-en="Years Experience" data-de="Jahre Erfahrung">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="stat2">17</div>
+          <div class="stat-label" data-en="Plants Deployed" data-de="Werke deployed">Plants Deployed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="stat3">10</div>
+          <div class="stat-label" data-en="Countries" data-de="Länder">Countries</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-photo-col">
+      <div class="hero-photo-wrap">
+        <img src="images/hero-portrait.jpg" alt="Vaibhav Shivaji Jadhav" loading="eager">
+        <div class="hero-photo-overlay"></div>
+        <div class="hero-photo-overlay-bottom"></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-indicator" aria-hidden="true">
+    <span data-en="scroll" data-de="scrollen">scroll</span>
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     ABOUT
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="about">
+  <div class="container">
+    <span class="section-label" data-en="// 01 about me" data-de="// 01 über mich">// 01 about me</span>
+    <div class="about-grid">
+      <div class="about-text" data-aos="fade-up">
+        <h2 data-en="Engineer.<br>Connector.<br>Problem Solver." data-de="Ingenieur.<br>Verbinder.<br>Problemlöser.">Engineer.<br>Connector.<br>Problem Solver.</h2>
+        <br>
+        <p data-en="Senior MES & IoT Engineer (M.Eng. Mechatronics & Cyber-Physical Systems) with over 5 years of experience in the digital transformation of process manufacturing. Expert in IT/OT convergence and ISA-95 compliant MES architecture. Successfully rolled out energy and production management systems across 17 sites and connected over 100 machines via OPC UA and MQTT. Focused on the end-to-end integration of complex manufacturing landscapes, system architecture, and shop floor process automation. DAAD Scholarship recipient."
+           data-de="Senior Solution Engineer, Manufacturing Execution System (MES) & Industrial IoT (IIoT) mit über 5 Jahren Erfahrung in der digitalen Transformation und Industry 4.0-Umsetzung in der Prozessfertigung. Experte für IT/OT-Konvergenz und ISA-95-konforme MES-Architektur. Erfolgreicher Rollout von Energie- und Produktionsmanagementsystemen über 17 Standorte sowie Anbindung von über 100 Maschinen via OPC UA und MQTT. DAAD-Stipendiat.">
+          Senior MES & IoT Engineer (M.Eng. Mechatronics & Cyber-Physical Systems) with over 5 years of experience in the digital transformation of process manufacturing. Expert in IT/OT convergence and ISA-95 compliant MES architecture. Successfully rolled out energy and production management systems across 17 sites and connected over 100 machines via OPC UA and MQTT. Focused on the end-to-end integration of complex manufacturing landscapes, system architecture, and shop floor process automation. DAAD Scholarship recipient.
+        </p>
+      </div>
+      <div data-aos="fade-up" data-aos-delay="150">
+        <div class="about-card">
+          <div class="about-card-item">
+            <div class="about-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <div class="about-card-label" data-en="Location" data-de="Standort">Location</div>
+              <div class="about-card-value">Leipzig, Germany</div>
+            </div>
+          </div>
+          <div class="about-card-item">
+            <div class="about-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 8l6 6 6-6"/><path d="M3 6h18"/><path d="M3 12h18"/><path d="M3 18h18"/></svg>
+            </div>
+            <div>
+              <div class="about-card-label" data-en="Languages" data-de="Sprachen">Languages</div>
+              <div class="about-card-value" data-en="English (Fluent) · German (B2) · Marathi · Hindi" data-de="Englisch (fließend) · Deutsch (B2) · Marathi · Hindi">English (Fluent) · German (B2) · Marathi · Hindi</div>
+            </div>
+          </div>
+          <div class="about-card-item">
+            <div class="about-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <div>
+              <div class="about-card-label" data-en="Scholarship" data-de="Stipendium">Scholarship</div>
+              <div class="about-card-value"><span class="daad-badge">★ DAAD Scholar</span></div>
+            </div>
+          </div>
+          <div class="about-card-item">
+            <div class="about-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="about-card-label" data-en="Status" data-de="Status">Status</div>
+              <div class="about-card-value"><span class="status-dot"></span> &nbsp;<span data-en="Open to opportunities" data-de="Offen für neue Möglichkeiten">Open to opportunities</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     WORK EXPERIENCE
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="work">
+  <div class="container">
+    <span class="section-label" data-en="// 02 experience" data-de="// 02 berufserfahrung">// 02 experience</span>
+    <h2 style="color:var(--text-light);font-size:clamp(32px,4vw,48px);margin-bottom:0" data-en="Where I've worked." data-de="Wo ich gearbeitet habe.">Where I've worked.</h2>
+    <div class="timeline">
+
+      <!-- Deloitte -->
+      <div class="timeline-entry" data-aos="fade-up">
+        <div class="entry-meta">
+          <span class="entry-date" data-en="05.2022 – Present" data-de="05.2022 – Aktuell">05.2022 – Present</span>
+          <span class="entry-company">Deloitte Consulting Solutions GmbH</span>
+        </div>
+        <div class="entry-role">
+          <span data-en="Senior Solution Engineer · Leipzig, Germany" data-de="Senior Solution Engineer · Leipzig, Deutschland">Senior Solution Engineer · Leipzig, Germany</span>
+        </div>
+        <div class="project-cards">
+          <!-- Card A -->
+          <div class="project-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="project-card-header">
+              <div class="project-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><circle cx="19" cy="19" r="3"/><circle cx="5" cy="19" r="3"/><line x1="12" y1="8" x2="19" y2="16"/><line x1="12" y1="8" x2="5" y2="16"/></svg>
+              </div>
+              <div class="project-title" data-en="Energy & Production Data Management Rollout — 17 Plants" data-de="Energie & Produktionsdatenmanagement Rollout — 17 Werke">Energy & Production Data Management Rollout — 17 Plants</div>
+            </div>
+            <ul class="project-bullets">
+              <li data-en="Led a 2-year global rollout of an energy and production data platform across 17 international plants, establishing real-time transparency across the entire manufacturing network." data-de="Leitung eines zweijährigen internationalen Rollouts einer Energie- und Produktionsdatenplattform über 17 Werke; Aufbau unternehmensweiter Echtzeit-Transparenz im gesamten Fertigungsnetzwerk.">Led a 2-year global rollout of an energy and production data platform across 17 international plants, establishing real-time transparency across the entire manufacturing network.</li>
+              <li data-en="Connected 100+ assets and energy meters via OPC UA, Modbus, and MQTT — replacing manual data entry with automated real-time pipelines." data-de="Anbindung von über 100 Anlagen und Energiezählern via OPC UA, Modbus und MQTT; Ablösung manueller Dateneingabe durch automatisierte Echtzeit-Datenpipelines.">Connected 100+ assets and energy meters via OPC UA, Modbus, and MQTT — replacing manual data entry with automated real-time pipelines.</li>
+              <li data-en="Standardized KPI frameworks (OEE, availability, performance, quality) to enable live, data-driven decision-making for executive management." data-de="Standardisierung von KPI-Frameworks (OEE, Verfügbarkeit, Leistung, Qualität) zur datengestützten Entscheidungsfindung für das Management.">Standardized KPI frameworks (OEE, availability, performance, quality) to enable live, data-driven decision-making for executive management.</li>
+              <li data-en="Conducted pre-commissioning OT network assessments and hardening; commissioned Siemens S7, Kepware, and Allen-Bradley edge infrastructure; trained local plant engineers." data-de="Durchführung von OT-Netzwerk-Assessments und Härtungsmaßnahmen vor Inbetriebnahme; Inbetriebnahme von Siemens S7-, Kepware- und Allen-Bradley-Edge-Infrastruktur sowie Schulung lokaler Werksingenieure.">Conducted pre-commissioning OT network assessments and hardening; commissioned Siemens S7, Kepware, and Allen-Bradley edge infrastructure; trained local plant engineers.</li>
+              <li data-en="Owned end-to-end programme delivery as central technical stakeholder interface — from requirements workshops through configuration to global go-live." data-de="Gesamtverantwortung für die Programmsteuerung als zentrale technische Schnittstelle – von Anforderungsworkshops über Konfiguration bis zum globalen Go-live.">Owned end-to-end programme delivery as central technical stakeholder interface — from requirements workshops through configuration to global go-live.</li>
+            </ul>
+            <div class="tech-tags">
+              <span class="tech-tag">OPC UA</span><span class="tech-tag">MQTT</span><span class="tech-tag">Modbus</span><span class="tech-tag">Siemens S7</span><span class="tech-tag">Kepware</span><span class="tech-tag">Allen-Bradley</span><span class="tech-tag">OEE</span><span class="tech-tag">IIoT</span>
+            </div>
+          </div>
+          <!-- Card B -->
+          <div class="project-card" data-aos="fade-up" data-aos-delay="160">
+            <div class="project-card-header">
+              <div class="project-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 01-9 9"/></svg>
+              </div>
+              <div class="project-title" data-en="MES Interface Analysis & MES–ERP Integration Strategy" data-de="MES-Schnittstellenanalyse & MES–ERP-Integrationsstrategie">MES Interface Analysis & MES–ERP Integration Strategy</div>
+            </div>
+            <ul class="project-bullets">
+              <li data-en="Reverse-engineered undocumented in-house MES systems by leading cross-functional workshops with IT and Engineering to create comprehensive interface maps from scratch." data-de="Reverse Engineering eines undokumentierten In-House-MES-Systems durch Leitung funktionsübergreifender Workshops mit IT und Engineering; vollständige Schnittstellenkarte von Grund auf erstellt.">Reverse-engineered undocumented in-house MES systems by leading cross-functional workshops with IT and Engineering to create comprehensive interface maps from scratch.</li>
+              <li data-en="Assessed all legacy MES–SAP ERP integration touchpoints, identifying compatibility gaps and validating data exchange viability." data-de="Bewertung aller Legacy-MES–SAP-ERP-Integrationspunkte; Identifikation von Kompatibilitätslücken und Validierung der Datenaustausch-Machbarkeit.">Assessed all legacy MES–SAP ERP integration touchpoints, identifying compatibility gaps and validating data exchange viability.</li>
+              <li data-en="Authored a technical roadmap and API specification, defining REST-based architectures to ensure scalable, maintainable MES–ERP data exchange." data-de="Erstellung einer technischen Roadmap und API-Spezifikation; Definition REST-basierter Architekturen für einen skalierbaren, wartbaren MES–ERP-Datenaustausch.">Authored a technical roadmap and API specification, defining REST-based architectures to ensure scalable, maintainable MES–ERP data exchange.</li>
+              <li data-en="Supported API development and end-to-end testing, ensuring stability of newly deployed MES–ERP interfaces." data-de="Unterstützung der API-Entwicklung und des End-to-End-Testings zur Sicherstellung der Stabilität neu implementierter MES–ERP-Schnittstellen.">Supported API development and end-to-end testing, ensuring stability of newly deployed MES–ERP interfaces.</li>
+            </ul>
+            <div class="tech-tags">
+              <span class="tech-tag">SAP ERP</span><span class="tech-tag">REST API</span><span class="tech-tag">MES Architecture</span><span class="tech-tag">ISA-95</span><span class="tech-tag">Legacy Integration</span>
+            </div>
+          </div>
+          <!-- Card C -->
+          <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="project-card-header">
+              <div class="project-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+              </div>
+              <div class="project-title" data-en="Smart Factory & Digital Manufacturing Solutions" data-de="Smart Factory & Digital Manufacturing Solutions">Smart Factory & Digital Manufacturing Solutions</div>
+            </div>
+            <ul class="project-bullets">
+              <li data-en="Configured SAP Digital Manufacturing end-to-end: modelled operations, SFC lifecycles, and order execution logic for a fully digital production environment." data-de="Konfiguration von SAP Digital Manufacturing End-to-End: Modellierung von Arbeitsvorgängen, SFC-Lebenszyklen und Auftragsausführungslogik für eine vollständig digitale Produktionsumgebung.">Configured SAP Digital Manufacturing end-to-end: modelled operations, SFC lifecycles, and order execution logic for a fully digital production environment.</li>
+              <li data-en="Supported integration of SAP DM with S/4HANA and EWM, synchronizing order processing and material staging across the full ISA-95 Levels 3–4 stack." data-de="Unterstützung der Integration von SAP DM mit S/4HANA und EWM; Synchronisierung von Auftragsabwicklung und Materialbereitstellung über den vollständigen ISA-95-Stack (Level 3–4).">Supported integration of SAP DM with S/4HANA and EWM, synchronizing order processing and material staging across the full ISA-95 Levels 3–4 stack.</li>
+              <li data-en="Developed custom SAP DM functions and POD plugins to demonstrate complex, client-specific manufacturing scenarios." data-de="Entwicklung benutzerdefinierter SAP-DM-Funktionen und POD-Plugins zur Demonstration komplexer, kundenspezifischer Fertigungsszenarien.">Developed custom SAP DM functions and POD plugins to demonstrate complex, client-specific manufacturing scenarios.</li>
+            </ul>
+            <div class="tech-tags">
+              <span class="tech-tag">SAP Digital Manufacturing</span><span class="tech-tag">S/4HANA</span><span class="tech-tag">SAP EWM</span><span class="tech-tag">SFC</span><span class="tech-tag">ISA-95</span><span class="tech-tag">POD Plugins</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GBneuhaus -->
+      <div class="timeline-entry" data-aos="fade-up">
+        <div class="entry-meta">
+          <span class="entry-date">04.2021 – 10.2021</span>
+          <span class="entry-company">GBneuhaus GmbH</span>
+        </div>
+        <div class="entry-role"><span data-en="Master's Thesis Engineer · Neuhaus am Rennweg, Germany" data-de="Masterand · Neuhaus am Rennweg, Deutschland">Master's Thesis Engineer · Neuhaus am Rennweg, Germany</span></div>
+        <div class="compact-entry">
+          <p data-en="Engineered and simulated an automated cleanroom Pyrosil pre-treatment process using ABB RobotStudio, integrating robot path planning and environmental parameter validation to optimise cyber-physical system performance within a smart manufacturing cell."
+             data-de="Entwicklung und Simulation eines automatisierten Pyrosil-Vorbehandlungsprozesses unter Reinraumbedingungen mittels ABB RobotStudio; Integration von Bahnplanung und Umgebungsparametervalidierung zur Optimierung der Cyber-Physischen Systemleistung.">
+            Engineered and simulated an automated cleanroom Pyrosil pre-treatment process using ABB RobotStudio, integrating robot path planning and environmental parameter validation to optimise cyber-physical system performance within a smart manufacturing cell.
+          </p>
+          <div class="tech-tags"><span class="tech-tag">ABB RobotStudio</span><span class="tech-tag">Cyber-Physical Systems</span><span class="tech-tag">Cleanroom Automation</span></div>
+        </div>
+      </div>
+
+      <!-- TH Deggendorf -->
+      <div class="timeline-entry" data-aos="fade-up">
+        <div class="entry-meta">
+          <span class="entry-date">10.2019 – 03.2022</span>
+          <span class="entry-company">Technische Hochschule Deggendorf</span>
+        </div>
+        <div class="entry-role"><span data-en="International Tutor · Deggendorf, Germany" data-de="Internationaler Tutor · Deggendorf, Deutschland">International Tutor · Deggendorf, Germany</span></div>
+        <div class="compact-entry">
+          <p data-en="Mentored 200+ international students across cultural and academic programmes. Built cross-cultural communication and stakeholder coordination skills directly applied in multinational client engagements."
+             data-de="Betreuung von über 200 internationalen Studierenden; Aufbau interkultureller Kommunikations- und Stakeholder-Koordinationskompetenzen, die direkt in multinationalen Kundenprojekten eingesetzt werden.">
+            Mentored 200+ international students across cultural and academic programmes. Built cross-cultural communication and stakeholder coordination skills directly applied in multinational client engagements.
+          </p>
+        </div>
+      </div>
+
+      <!-- Thermax -->
+      <div class="timeline-entry" data-aos="fade-up">
+        <div class="entry-meta">
+          <span class="entry-date">12.2015 – 12.2016</span>
+          <span class="entry-company">Thermax Ltd.</span>
+        </div>
+        <div class="entry-role"><span data-en="Bachelor's Thesis Engineer & Intern · Pune, India" data-de="Praktikum und Bachelorand · Pune, Indien">Bachelor's Thesis Engineer & Intern · Pune, India</span></div>
+        <div class="compact-entry">
+          <p data-en="Enhanced manufacturing efficiency and safety by standardising hybrid cooler pneumatic testing procedures, implementing a seamless welding process, and authoring a safety manual that reduced shop-floor accidents."
+             data-de="Steigerung der Fertigungseffizienz durch Standardisierung pneumatischer Prüfverfahren für Hybrid-Kühler, Einführung eines nahtlosen Schweißverfahrens sowie Erstellung eines Sicherheitshandbuchs zur Reduzierung von Arbeitsunfällen.">
+            Enhanced manufacturing efficiency and safety by standardising hybrid cooler pneumatic testing procedures, implementing a seamless welding process, and authoring a safety manual that reduced shop-floor accidents.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SKILLS
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="skills">
+  <div class="container">
+    <span class="section-label" data-en="// 03 skills" data-de="// 03 fähigkeiten">// 03 skills</span>
+    <div class="skills-intro" data-aos="fade-up">
+      <h2 data-en="What I work with." data-de="Womit ich arbeite.">What I work with.</h2>
+      <p data-en="Five years of hands-on work across the full Industry 4.0 stack — from OT layer to cloud." data-de="Fünf Jahre praktische Erfahrung über den gesamten Industrie 4.0 Stack — von der OT-Ebene bis zur Cloud.">Five years of hands-on work across the full Industry 4.0 stack — from OT layer to cloud.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="0">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="2" x2="9" y2="4"/><line x1="15" y1="2" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="22"/><line x1="15" y1="20" x2="15" y2="22"/><line x1="20" y1="9" x2="22" y2="9"/><line x1="20" y1="14" x2="22" y2="14"/><line x1="2" y1="9" x2="4" y2="9"/><line x1="2" y1="14" x2="4" y2="14"/></svg></div>
+          <div class="skill-card-title" data-en="MES & MOM" data-de="MES & MOM">MES & MOM</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">MES Architecture (ISA-95/88)</span><span class="skill-tag">SAP Digital Manufacturing</span><span class="skill-tag">OEE/KPI Frameworks</span><span class="skill-tag">MES–ERP Integration</span><span class="skill-tag">SAP Cloud ALM</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="80">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0114.08 0"/><path d="M1.42 9a16 16 0 0121.16 0"/><path d="M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg></div>
+          <div class="skill-card-title" data-en="IIoT & Connectivity" data-de="IIoT & Konnektivität">IIoT & Connectivity</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">OPC UA</span><span class="skill-tag">MQTT</span><span class="skill-tag">REST APIs</span><span class="skill-tag">PTC Kepware</span><span class="skill-tag">Siemens S7</span><span class="skill-tag">Allen Bradley</span><span class="skill-tag">IT/OT Convergence</span><span class="skill-tag">IEC 62443</span><span class="skill-tag">SCADA</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="120">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <div class="skill-card-title" data-en="Cloud & Data" data-de="Cloud & Daten">Cloud & Data</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS</span><span class="skill-tag">Azure</span><span class="skill-tag">Power BI</span><span class="skill-tag">Python</span><span class="skill-tag">JavaScript</span><span class="skill-tag">Predictive Maintenance</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="160">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></div>
+          <div class="skill-card-title" data-en="Project & Tools" data-de="Projekt & Tools">Project & Tools</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">SAP Cloud ALM</span><span class="skill-tag">Jira</span><span class="skill-tag">Agile</span><span class="skill-tag">Waterfall</span><span class="skill-tag">Multi-site Rollout</span><span class="skill-tag">Workshop Facilitation</span><span class="skill-tag">Testing & QA</span>
+        </div>
+      </div>
+      <div class="skill-card" data-aos="fade-up" data-aos-delay="200" style="grid-column:1/-1">
+        <div class="skill-card-header">
+          <div class="skill-card-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 010 14.14M4.93 4.93a10 10 0 000 14.14"/></svg></div>
+          <div class="skill-card-title" data-en="Automation & Engineering" data-de="Automatisierung & Konstruktion">Automation & Engineering</div>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">PLC Programming</span><span class="skill-tag">ABB RobotStudio</span><span class="skill-tag">AutoCAD</span><span class="skill-tag">SolidWorks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     EDUCATION
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="education">
+  <div class="container">
+    <span class="section-label" data-en="// 04 education" data-de="// 04 ausbildung">// 04 education</span>
+    <h2 data-en="Academic foundation." data-de="Akademische Grundlage.">Academic foundation.</h2>
+    <div class="edu-grid" style="margin-top:48px">
+      <div class="edu-card" data-aos="fade-up">
+        <div class="edu-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="edu-degree" data-en="M.Eng. Mechatronic & Cyber-Physical Systems" data-de="M.Eng. Mechatronische und Cyber-Physische Systeme">M.Eng. Mechatronic & Cyber-Physical Systems</div>
+        <div class="edu-institution">Technische Hochschule Deggendorf (Technology Campus Cham)</div>
+        <div class="edu-date" data-en="Oct 2018 – Mar 2022" data-de="Okt 2018 – März 2022">Oct 2018 – Mar 2022</div>
+        <div class="edu-thesis" data-en="Thesis: Automation of the Pyrosil pre-treatment process for functional spray coating under cleanroom conditions — robot path planning, process simulation (ABB RobotStudio), integration into a controlled smart manufacturing cell." data-de="Masterarbeit: Automatisierung des Pyrosil-Vorbehandlungsprozesses für die funktionelle Sprühbeschichtung unter Reinraumbedingungen – Bahnplanung, Prozesssimulation (ABB RobotStudio), Integration in eine kontrollierte Smart-Manufacturing-Zelle.">Thesis: Automation of the Pyrosil pre-treatment process for functional spray coating under cleanroom conditions — robot path planning, process simulation (ABB RobotStudio), integration into a controlled smart manufacturing cell.</div>
+        <span class="daad-badge">★ <span data-en="DAAD Scholar" data-de="DAAD-Stipendiat">DAAD Scholar</span></span>
+      </div>
+      <div class="edu-card" data-aos="fade-up" data-aos-delay="120">
+        <div class="edu-card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+        <div class="edu-degree" data-en="B.Eng. Mechanical Engineering" data-de="B.Eng. Maschinenbau">B.Eng. Mechanical Engineering</div>
+        <div class="edu-institution" data-en="Savitribai Phule Pune University, Pune, India" data-de="Savitribai Phule Pune University, Pune, Indien">Savitribai Phule Pune University, Pune, India</div>
+        <div class="edu-date">Jul 2013 – Jun 2017</div>
+        <div class="edu-thesis" data-en="Thesis: Process Designing for Pneumatic Testing of Hybrid Chiller." data-de="Bachelorarbeit: Process Designing for Pneumatic Testing of Hybrid Chiller.">Thesis: Process Designing for Pneumatic Testing of Hybrid Chiller.</div>
+      </div>
+    </div>
+    <div class="certs-row" data-aos="fade-up">
+      <div class="cert-badge"><div class="cert-badge-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"/></svg></div><div class="cert-badge-text">Professional Scrum Master I</div></div>
+      <div class="cert-badge"><div class="cert-badge-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div><div class="cert-badge-text">AWS Cloud Practitioner</div></div>
+      <div class="cert-badge"><div class="cert-badge-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg></div><div class="cert-badge-text">PTC Kepware Associate</div></div>
+      <div class="cert-badge"><div class="cert-badge-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/></svg></div><div class="cert-badge-text">SAP Digital Manufacturing Fundamentals</div></div>
+      <div class="cert-badge"><div class="cert-badge-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div><div class="cert-badge-text" data-en="German Language B2 (Goethe-Institut)" data-de="Deutschzertifikat B2 (Goethe-Institut)">German Language B2 (Goethe-Institut)</div></div>
+    </div>
+    <div class="daad-block" data-aos="fade-up">
+      <p>★ &nbsp;<strong data-en="DAAD Scholarship" data-de="DAAD-Stipendium">DAAD Scholarship</strong> — <span data-en="Awarded by the German Academic Exchange Service for outstanding academic performance and intercultural engagement during Master's studies in Germany." data-de="Ausgezeichnet vom Deutschen Akademischen Austauschdienst für hervorragende akademische Leistungen und interkulturelles Engagement während des Masterstudiums in Deutschland.">Awarded by the German Academic Exchange Service for outstanding academic performance and intercultural engagement during Master's studies in Germany.</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     DIVIDER — // qualanc
+═══════════════════════════════════════════════════════════════════════════ -->
+<div id="qualanc-divider">
+  <div class="divider-inner">
+    <div class="divider-line" id="dividerLineLeft"></div>
+    <span class="divider-text" id="dividerText"></span>
+    <div class="divider-line" id="dividerLineRight"></div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     STORY — BEYOND THE BLUEPRINT
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="story">
+  <div class="container">
+    <span class="section-label" data-en="// 05 beyond the blueprint" data-de="// 05 jenseits der blaupause">// 05 beyond the blueprint</span>
+
+    <div class="story-opener" data-aos="fade-up">
+      <span data-en="&ldquo;Let&rsquo;s talk apart from work &mdash; do you have a favourite song, or a coffee spot you always go back to? I had one.&rdquo;" data-de="&bdquo;Lass uns mal abseits der Arbeit reden &mdash; hast du ein Lieblingslied oder ein Café, zu dem du immer wieder zurückkehrst? Ich hatte eines.&ldquo;">&ldquo;Let&rsquo;s talk apart from work &mdash; do you have a favourite song, or a coffee spot you always go back to? I had one.&rdquo;</span>
+    </div>
+
+    <div class="story-letter" data-aos="fade-up">
+      <p data-en="My journey didn't begin in a lab — it began in the lush, rain-drenched hills of the Western Ghats in India, where the monsoons set the calendar and summer meant climbing trees for sun-ripened mangoes. My school felt more like a home than a classroom. Time moved the way it should."
+         data-de="Mein Weg begann nicht in einem Labor — sondern in den üppigen, regenreichen Hügeln der Westghats in Indien, wo die Monsune den Kalender bestimmten und der Sommer das Klettern auf Bäume für sonnengereifte Mangos bedeutete. Meine Schule fühlte sich eher wie ein Zuhause an als ein Klassenzimmer. Die Zeit bewegte sich so, wie sie sollte.">
+        My journey didn't begin in a lab — it began in the lush, rain-drenched hills of the Western Ghats in India, where the monsoons set the calendar and summer meant climbing trees for sun-ripened mangoes. My school felt more like a home than a classroom. Time moved the way it should.
+      </p>
+      <p data-en="Manufacturing was always in my blood. I grew up watching sparks fly in our family's workshop — wood shavings, steel frames, things being made with hands. But I felt a pull toward something else: I wanted to find the brain behind the brawn of the machines. That question carried me from the fast streets of Pune all the way to Germany."
+         data-de="Fertigung lag mir immer im Blut. Ich wuchs damit auf, Funken in der Werkstatt unserer Familie fliegen zu sehen — Holzspäne, Stahlrahmen, Dinge, die mit Händen gemacht wurden. Aber ich spürte eine Anziehungskraft zu etwas anderem: Ich wollte das Gehirn hinter den Muskeln der Maschinen finden. Diese Frage trug mich von den schnellen Straßen Punes bis nach Deutschland.">
+        Manufacturing was always in my blood. I grew up watching sparks fly in our family's workshop — wood shavings, steel frames, things being made with hands. But I felt a pull toward something else: I wanted to find the brain behind the brawn of the machines. That question carried me from the fast streets of Pune all the way to Germany.
+      </p>
+      <p data-en="The path wasn't always smooth. Just as I was finding my footing in Mechatronics, the world stopped for a pandemic. It tested my limits — but it also sharpened my focus. Today, as a Senior Engineer at Deloitte, that question finally has an answer: I connect the Shop Floor to the Top Floor."
+         data-de="Der Weg war nicht immer glatt. Gerade als ich in der Mechatronik Fuß fasste, hielt die Welt für eine Pandemie inne. Sie testete meine Grenzen — aber sie schärfte auch meinen Fokus. Heute, als Senior Engineer bei Deloitte, hat diese Frage endlich eine Antwort: Ich verbinde den Shopfloor mit dem Top Floor.">
+        The path wasn't always smooth. Just as I was finding my footing in Mechatronics, the world stopped for a pandemic. It tested my limits — but it also sharpened my focus. Today, as a Senior Engineer at Deloitte, that question finally has an answer: I connect the Shop Floor to the Top Floor.
+      </p>
+    </div>
+
+    <div class="story-cols" data-aos="fade-up">
+      <div class="story-col">
+        <div class="story-col-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+        <h3 data-en="Through the Lens" data-de="Durch die Linse">Through the Lens</h3>
+        <p data-en="Travel. Architecture. Street life. The world looks different when you're looking for a frame." data-de="Reisen. Architektur. Straßenleben. Die Welt sieht anders aus, wenn man nach dem richtigen Ausschnitt sucht.">Travel. Architecture. Street life. The world looks different when you're looking for a frame.</p>
+      </div>
+      <div class="story-col">
+        <div class="story-col-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></div>
+        <h3 data-en="Finding the Rhythm" data-de="Den Rhythmus finden">Finding the Rhythm</h3>
+        <p data-en="Tabla was my first instrument — school prayers, private ceremonies. GeoSherd keeps that connection alive across time zones." data-de="Tabla war mein erstes Instrument — Schulgebete, private Zeremonien. GeoSherd hält diese Verbindung über Zeitzonen hinweg lebendig.">Tabla was my first instrument — school prayers, private ceremonies. GeoSherd keeps that connection alive across time zones.</p>
+      </div>
+      <div class="story-col">
+        <div class="story-col-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+        <h3 data-en="Always Moving" data-de="Immer in Bewegung">Always Moving</h3>
+        <p data-en="10 countries. Prague is a habit. Cham is home. Still looking for the best coffee." data-de="10 Länder. Prag ist eine Gewohnheit. Cham ist Heimat. Noch immer auf der Suche nach dem besten Kaffee.">10 countries. Prague is a habit. Cham is home. Still looking for the best coffee.</p>
+      </div>
+    </div>
+
+    <div data-aos="fade-up">
+      <h2 class="gallery-heading" data-en="Frames from the Road" data-de="Bilder unterwegs">Frames from the Road</h2>
+      <span class="gallery-sub" data-en="Shot on Nikon · Germany · China · South Korea · Croatia" data-de="Aufgenommen mit Nikon · Deutschland · China · Südkorea · Kroatien">Shot on Nikon · Germany · China · South Korea · Croatia</span>
+      <div class="photo-grid">
+        <div class="photo-item">
+          <img src="images/photo-leipzig.jpg" alt="Leipzig, Germany — autumn fog through the gates" loading="lazy">
+          <div class="photo-caption" data-en="Leipzig, Germany" data-de="Leipzig, Deutschland">Leipzig, Germany</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/photo-shanghai.jpg" alt="Shanghai Bund at night" loading="lazy">
+          <div class="photo-caption" data-en="Shanghai, China" data-de="Shanghai, China">Shanghai, China</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/photo-jeju.jpg" alt="Jeju Island, South Korea" loading="lazy">
+          <div class="photo-caption" data-en="Jeju Island, South Korea" data-de="Insel Jeju, Südkorea">Jeju Island, South Korea</div>
+        </div>
+        <div class="photo-item">
+          <img src="images/photo-croatia.jpg" alt="Plitvice Lakes, Croatia" loading="lazy">
+          <div class="photo-caption" data-en="Plitvice Lakes, Croatia" data-de="Plitvicer Seen, Kroatien">Plitvice Lakes, Croatia</div>
+        </div>
+      </div>
+      <p class="gallery-credit" data-en="Shot on Nikon · Travel & Landscape Photography" data-de="Aufgenommen mit Nikon · Reise- & Landschaftsfotografie">Shot on Nikon · Travel & Landscape Photography</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     CONTACT
+═══════════════════════════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="container" style="text-align:center">
+    <span class="section-label" style="justify-content:center;display:block" data-en="// 06 contact" data-de="// 06 kontakt">// 06 contact</span>
+    <h2 class="contact-heading" data-en="Let&rsquo;s connect." data-de="Lass uns verbinden.">Let&rsquo;s connect.</h2>
+    <p class="contact-sub" data-en="Open to senior roles in MES, IIoT, and Industry 4.0 digital transformation." data-de="Offen für Senior-Positionen in MES, IIoT und der digitalen Transformation (Industrie 4.0).">Open to senior roles in MES, IIoT, and Industry 4.0 digital transformation.</p>
+    <div class="contact-btns">
+      <a href="mailto:vaibhavj510@yahoo.in" class="contact-btn-outline" aria-label="Send email">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        vaibhavj510@yahoo.in
+      </a>
+      <a href="https://www.linkedin.com/in/vaibhav-jadhav-9001a7101/" target="_blank" rel="noopener" class="contact-btn-outline" aria-label="LinkedIn profile">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        LinkedIn
+      </a>
+      <a href="cv/Vaibhav_Jadhav_CV_EN.pdf" class="contact-btn-solid cv-download" download>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span class="cv-download-label" data-en="Download CV" data-de="Lebenslauf herunterladen">Download CV</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════════════════════════════ -->
+<footer>
+  <p>© 2025 Vaibhav Shivaji Jadhav</p>
+  <p data-en="Leipzig, Germany" data-de="Leipzig, Deutschland">Leipzig, Germany</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════════════════════════════
+     SCRIPTS
+═══════════════════════════════════════════════════════════════════════════ -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+// ─── INIT ────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  AOS.init({ once: true, duration: 700, easing: 'ease-out', offset: 80 });
+  lucide.createIcons();
+  const savedLang = localStorage.getItem('lang') || 'en';
+  setLanguage(savedLang, false);
+  startTypingAnimation(savedLang);
+  initNavbar();
+  initMobileMenu();
+  initCountUp();
+  initDivider();
+  initHamburger();
+});
+
+// ─── LANGUAGE TOGGLE ─────────────────────────────────────────────────────────
+function setLanguage(lang, animate = true) {
+  const elements = document.querySelectorAll('[data-en]');
+  if (animate) {
+    elements.forEach(el => { el.style.opacity = '0'; el.style.transition = 'opacity 0.18s'; });
+    setTimeout(() => {
+      swapText(lang);
+      elements.forEach(el => { el.style.opacity = '1'; });
+    }, 180);
+  } else {
+    swapText(lang);
+  }
+  // CV links
+  const cvPath = lang === 'en' ? 'cv/Vaibhav_Jadhav_CV_EN.pdf' : 'cv/Vaibhav_Jadhav_CV_DE.pdf';
+  document.querySelectorAll('.cv-download').forEach(el => { el.href = cvPath; });
+  // Toggle buttons
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  // html lang
+  document.documentElement.lang = lang;
+  localStorage.setItem('lang', lang);
+}
+
+function swapText(lang) {
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.dataset[lang];
+    if (val !== undefined) {
+      if (el.children.length === 0) el.innerHTML = val;
+      else el.innerHTML = val;
+    }
+  });
+}
+
+document.querySelectorAll('.lang-btn').forEach(btn => {
+  btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+});
+
+// ─── TYPING ANIMATION ─────────────────────────────────────────────────────────
+const taglines = {
+  en: 'Connecting the Shop Floor to the Top Floor.',
+  de: 'Die Verbindung von Shopfloor und Management.'
+};
+let typingInterval = null;
+
+function startTypingAnimation(lang) {
+  const el = document.getElementById('heroTagline');
+  if (!el) return;
+  if (typingInterval) clearInterval(typingInterval);
+  el.textContent = '';
+  const text = taglines[lang];
+  let i = 0;
+  typingInterval = setInterval(() => {
+    el.textContent += text[i];
+    i++;
+    if (i >= text.length) clearInterval(typingInterval);
+  }, 50);
+}
+
+// ─── NAVBAR SCROLL BEHAVIOUR ─────────────────────────────────────────────────
+function initNavbar() {
+  const nav = document.getElementById('navbar');
+  let lastScroll = 0;
+  window.addEventListener('scroll', () => {
+    const cur = window.scrollY;
+    if (cur > 60) nav.classList.add('scrolled');
+    else nav.classList.remove('scrolled');
+    if (cur > lastScroll && cur > 200) nav.classList.add('hidden');
+    else nav.classList.remove('hidden');
+    lastScroll = cur;
+  }, { passive: true });
+}
+
+// ─── MOBILE MENU ─────────────────────────────────────────────────────────────
+function initMobileMenu() {
+  const menu = document.getElementById('mobileMenu');
+  menu.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => menu.classList.remove('open'));
+  });
+  menu.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => setLanguage(btn.dataset.lang));
+  });
+}
+
+function initHamburger() {
+  const btn = document.getElementById('hamburger');
+  const menu = document.getElementById('mobileMenu');
+  btn.addEventListener('click', () => menu.classList.toggle('open'));
+}
+
+// ─── COUNT-UP ANIMATION ───────────────────────────────────────────────────────
+function initCountUp() {
+  const stats = [
+    { id: 'stat1', target: 5, suffix: '+' },
+    { id: 'stat2', target: 17, suffix: '' },
+    { id: 'stat3', target: 10, suffix: '' }
+  ];
+  function runCountUp() {
+    stats.forEach(({ id, target, suffix }) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.textContent = '0' + suffix;
+      let cur = 0;
+      const step = Math.max(target / 40, 0.5);
+      const timer = setInterval(() => {
+        cur = Math.min(cur + step, target);
+        el.textContent = Math.round(cur) + suffix;
+        if (cur >= target) { el.textContent = target + suffix; clearInterval(timer); }
+      }, 30);
+    });
+  }
+  // Delay slightly so page has rendered, then run regardless
+  setTimeout(runCountUp, 600);
+}
+
+// ─── DIVIDER ANIMATION ────────────────────────────────────────────────────────
+function initDivider() {
+  const text = '// qualanc';
+  const el = document.getElementById('dividerText');
+  const lineL = document.getElementById('dividerLineLeft');
+  const lineR = document.getElementById('dividerLineRight');
+  if (!el) return;
+  // Build chars
+  el.innerHTML = text.split('').map(c =>
+    `<span class="divider-char">${c === ' ' ? '&nbsp;' : c}</span>`
+  ).join('');
+  lineL.style.transform = 'scaleX(0)';
+  lineR.style.transform = 'scaleX(0)';
+  lineL.style.transition = 'transform 0.6s ease 0.5s';
+  lineR.style.transition = 'transform 0.6s ease 0.5s';
+
+  let fired = false;
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !fired) {
+      fired = true;
+      const chars = el.querySelectorAll('.divider-char');
+      chars.forEach((c, i) => {
+        setTimeout(() => c.classList.add('visible'), i * 40);
+      });
+      setTimeout(() => {
+        lineL.style.transform = 'scaleX(1)';
+        lineR.style.transform = 'scaleX(1)';
+      }, 100);
+      obs.disconnect();
+    }
+  }, { threshold: 0.5 });
+  obs.observe(el);
+}
+</script>
+</body>
+</html>
